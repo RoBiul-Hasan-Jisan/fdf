@@ -1,0 +1,372 @@
+<!-- prefix_sum.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prefix Sum - Competitive Programming</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="cp.html">Competitive Programming Topics</a>
+  </nav>
+
+  <!-- Header Section -->
+  <header class="jumbotron text-center">
+    <h1 class="display-4">Prefix Sum</h1>
+    <p class="lead">Why use ?</p>
+
+    
+        <p class="lead">  1. Efficient Range Sum Queries static array. </p>
+        <p class="lead"> 2. Quick Accumulation of Partial Sums. </p>
+        <p class="lead"> 3. Reduces Repeated Computation .</p>
+        <p class="lead">  4. Applications in Various Algorithms.
+          <li>Sliding window problems.</li>
+          <li>Subarray problems.</li>
+          <li>2D prefix sums.</li> </p>
+
+  
+          
+        
+            <div class="shape circle"></div>
+          <div class="shape circle2"></div>
+          <div class="shape square"></div>
+          <div class="shape square2"></div>
+          </header>
+    
+    
+
+
+  <!-- Tutorial Section -->
+  <section class="container mt-5">
+    <h2>Prefix Sum Tutorial</h2>
+    <p>The prefix sum is an array technique used to compute cumulative sums efficiently.</p>
+    <pre>
+// Example Code in c++
+//1D       
+#include< bits/stdc++.h >
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    //Also we  can use it  std::partial_sum
+
+    vector<int> presum(n + 1, 0);
+    for (int i = 1; i <= n; i++)
+        presum[i] = presum[i - 1] + arr[i - 1];
+
+
+    for (int i = 1; i <= n; i++)
+        cout << presum[i] << " ";
+
+    return 0;
+}
+</pre>
+<h1>Prefix sum use for range Queries static</h1>
+<pre>
+
+
+    #include < bits/stdc++.h>
+    using namespace std;
+    
+    int main() {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    
+        int n;
+        cout << "Enter the number of elements: ";
+        cin >> n;
+        vector<int> arr(n);
+        cout << "Enter the elements of the array: ";
+        for (int i = 0; i < n; i++) cin >> arr[i];
+    
+        // Build prefix sum array
+        vector<int> presum(n + 1, 0);
+        for (int i = 1; i <= n; i++) {
+            presum[i] = presum[i - 1] + arr[i - 1];
+        }
+    
+        int q;
+        cout << "Enter the number of range queries: ";
+        cin >> q;
+        while (q--) {
+            int l, r;
+            cout << "Enter the range (l r): ";
+            cin >> l >> r;
+            
+            // Calculate sum from index l to r
+            int range_sum = presum[r + 1] - presum[l];
+            cout << "Sum from index " << l << " to " << r << " is: " << range_sum << "\n";
+        }
+    
+        return 0;
+    }
+    
+ 
+
+    </pre>
+    <p>  
+        <p>Consider the array [2, 4, 6, 8, 10].<br>
+            <br>
+            The presum array would be:<br>
+            <br>
+            presum[0] = 0<br>
+            presum[1] = 2<br>
+            presum[2] = 2 + 4 = 6<br>
+            presum[3] = 2 + 4 + 6 = 12<br>
+            presum[4] = 2 + 4 + 6 + 8 = 20<br>
+            presum[5] = 2 + 4 + 6 + 8 + 10 = 30<br>
+            If the query is (1, 3), the range sum is:<br>
+            <br>
+            presum[4] − presum[1] = 20 − 2 = 18<br>
+            presum[4] − presum[1] = 20 − 2 = 18<br>
+            which corresponds to the sum 4 + 6 + 8 = 18.<br>
+            <br>
+            Complexity<br>
+            Time Complexity: O(n) to build the prefix sum array, and O(1) for each range sum query.<br>
+            Space Complexity: O(n) for the prefix sum array.</p>
+            
+    </p>
+  <h1>2D prefix Sum </h1>
+    <pre>
+        //2D
+        #include < bits/stdc++.h>
+        using namespace std;
+        
+        const int N = 1005; // Maximum dimensions for the matrix
+        int a[N][N], pref[N][N];
+        
+        int main() {
+            ios_base::sync_with_stdio(0);
+            cin.tie(0);
+            
+            int n, m; 
+            cin >> n >> m; // Read the dimensions of the matrix
+            
+            // Read the matrix
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
+                    cin >> a[i][j];
+                }
+            }
+        
+            // Build the prefix sum array
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
+                    pref[i][j] = pref[i - 1][j] + pref[i][j - 1] - pref[i - 1][j - 1] + a[i][j];
+                }
+            }
+        
+            int q; 
+            cin >> q; // Read the number of queries
+            while (q--) {
+                int x1, y1, x2, y2; 
+                cin >> x1 >> y1 >> x2 >> y2; // Read the corners of the query rectangle
+                // Calculate the sum of the specified rectangle using the prefix sum array
+                int ans = pref[x2][y2] - pref[x1 - 1][y2] - pref[x2][y1 - 1] + pref[x1 - 1][y1 - 1];
+                cout << ans << '\n'; // Output the result
+            }
+        
+            return 0;
+        }
+        
+    </pre>
+    <pre>
+        <p>
+            <div class="problem-item">
+                <a href="https://cses.fi/problemset/task/1646" target="_blank">Basic Sum Queries (Prefix Sums)</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/466/C" target="_blank">466C - Number of Ways</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/816/problem/B" target="_blank">B. Karen and Coffee</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/313/problem/B" target="_blank">B. Ilya and Queries</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/1363/B" target="_blank">B. Subsequence Hate</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/433/problem/B" target="_blank">B - Kuriyama Mirai's Stones</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/363/B" target="_blank">B. Fence</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/296/problem/C" target="_blank">C. Greg and Array</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/1341/B" target="_blank">B. Nastya and Door</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/961/B" target="_blank">B. Lecture Sleep</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/276/C" target="_blank">C. Little Girl and Maximum Sum</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/1355/problem/C" target="_blank">C. Count Triangles</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1474" target="_blank">10533 - Digit Primes</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://www.spoj.com/problems/RANGESUM/en/" target="_blank">RANGESUM - Range Sum</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://www.spoj.com/problems/CSUMQ/en/" target="_blank">CSUMQ - Cumulative Sum Query</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3102" target="_blank">11951 - Area</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=924" target="_blank">983 - Localized Summing for Blurring</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=44" target="_blank">108 - Maximum Sum</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://atcoder.jp/contests/abc186/tasks/abc186_d" target="_blank">ABC186 D</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://atcoder.jp/contests/abc182/tasks/abc182_d" target="_blank">ABC182 D</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/327/problem/A" target="_blank">Contest 327 A</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://www.codechef.com/problems/JUN2" target="_blank">JUN2</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/729/problem/B" target="_blank">Contest 729 B</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://www.codechef.com/APRIL21B/problems/KAVGMAT" target="_blank">KAVGMAT</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://cses.fi/problemset/task/1652" target="_blank">CSES Task 1652</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://www.codechef.com/IARCSJUD/problems/TIMBER/" target="_blank">TIMBER</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://cses.fi/problemset/task/1660/" target="_blank">CSES Task 1660</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://cses.fi/problemset/task/1661/" target="_blank">CSES Task 1661</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/contest/1398/problem/C" target="_blank">Contest 1398 C</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/1016/B" target="_blank">B. Problem 1016</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/611/C" target="_blank">C. Problem 611</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/877/B" target="_blank">B. Problem 877</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/1175/D" target="_blank">D. Problem 1175</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/983/B" target="_blank">B. Problem 983</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/1016/C" target="_blank">C. Problem 1016</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/problemset/problem/372/B" target="_blank">B. Problem 372</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://cf.sunxiaochuannmsl.workers.dev/group/3nQaj5GMG5/contest/372026" target="_blank">Contest 372026</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://codeforces.com/group/isP4JMZTix/contest/386415" target="_blank">Contest 386415</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            <div class="problem-item">
+                <a href="https://www.codechef.com/practice/prefix-sums" target="_blank">Prefix Sums Practice</a>
+                <button class="done-button" onclick="markAsDone(this)">Done</button>
+            </div>
+            
+        </p>
+        <p>
+            For more Resources:
+            <ul>
+                <li><a href="https://usaco.guide/silver/prefix-sums?lang=cpp" target="_blank">USACO Guide: Prefix Sums</a></li>
+                <li><a href="https://usaco.guide/silver/more-prefix-sums?lang=cpp" target="_blank">USACO Guide: More Prefix Sums</a></li>
+                <li><a href="https://youkn0wwho.academy/topic-list/2d_prefix_sum" target="_blank">You Know Who Academy: 2D Prefix Sum</a></li>
+                <li><a href="https://youkn0wwho.academy/topic-list/prefix_sum" target="_blank">You Know Who Academy: Prefix Sum</a></li>
+            </ul>
+        </p>
+        
+
+
+
+    </pre>
+      
+
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="text-center bg-dark text-light py-3 mt-5">
+    <p>&copy; 2024 Educational Hub</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
