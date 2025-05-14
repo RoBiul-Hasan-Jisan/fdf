@@ -1,0 +1,555 @@
+ /* styles.css */
+
+/* Style the header */
+
+
+/* Button styling with banner effect */
+.custom-btn {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: #1c1c2e;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  text-decoration: none; /* Remove underline */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.custom-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  background: #2a2a4a; /* Darken the background on hover */
+}
+
+.custom-btn:hover .floating-shape {
+  opacity: 1; /* Increase opacity of shapes on hover */
+}
+
+/* Adjust the text color on hover */
+.custom-btn:hover .text-large {
+  color: #f39c12;
+}
+
+.custom-btn:hover .text-small {
+  color: #3498db;
+}
+
+/* Additional floating shape hover animations */
+.shape1:hover {
+  animation: floatHover 3s ease-in-out infinite;
+}
+
+.shape2:hover {
+  animation: floatHover 4s ease-in-out infinite;
+}
+
+/* Keyframes for hover animation */
+@keyframes floatHover {
+  0%, 100% { transform: translateY(0) rotate(45deg); }
+  50% { transform: translateY(-20px) rotate(45deg); }
+}
+
+
+/* Wavy background */
+.custom-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    135deg,
+    #2d2d4d 0,
+    #2d2d4d 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  opacity: 0.15;
+  z-index: 1;
+}
+
+/* Floating shapes */
+.floating-shape {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.8;
+}
+
+.shape1 {
+  width: 60px;
+  height: 30px;
+  background-color: #3b80f1;
+  border-radius: 50%;
+  top: 20px;
+  left: 20px;
+  transform: rotate(180deg);
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape2 {
+  width: 50px;
+  height: 50px;
+  background-color: #d14a4a;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  bottom: 20px;
+  right: 20px;
+  
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(-10px) rotate(45deg); }
+  50% { transform: translateY(-10px) rotate(45deg); }
+}
+
+/* Text styling */
+.content {
+  position: relative;
+  color: #ffffff;
+  z-index: 3;
+  text-align: center;
+}
+
+.text-small {
+  font-size: 16px;
+  color: #3b80f1;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.text-large {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.text-large:first-of-type {
+  color: #f1c40f;
+}
+
+.text-large:last-of-type {
+  color: #e74c3c;
+}
+
+header.jumbotron {
+  background-color: #282c34;
+  color: #ffffff;
+  padding: 2rem;
+}
+
+section {
+  padding: 1.5rem 0;
+}
+
+h2 {
+  color: #007bff;
+}
+
+/* Code snippet style */
+pre {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+
+
+
+/* Footer style */
+footer {
+  background-color: #333;
+  color: #ffffff;
+}
+/* styles.css */
+
+/* General page styling */
+body {
+  background-color: #f5f5f5;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+/* Styling for buttons on the homepage */
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+
+body {
+  font-family: Arial, sans-serif; /* Choose a clean and readable font */
+  background-color: #f4f4f4; /* A light background for better contrast */
+  margin: 20px; /* Add some margin around the body */
+}
+
+.problem-item {
+  margin-bottom: 30px; /* Space between each problem item */
+  padding: 15px; /* Inner padding for better click area */
+  background-color: #ffffff; /* White background for each item */
+  border-radius: 5px; /* Slightly rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+a {
+  text-decoration: none; /* Remove underline for links */
+  color: #007bff; /* Bootstrap blue color for links */
+  font-size: 18px; /* Increase font size for readability */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover for clarity */
+}
+
+.done-button {
+  background-color: #28a745; /* Green background for Done button */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+  padding: 10px 15px; /* Padding for button */
+  border-radius: 5px; /* Rounded corners for buttons */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 16px; /* Font size for button text */
+  margin-left: 10px; /* Space between link and button */
+}
+
+.done-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+
+
+
+/*extra*/
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  opacity: 0.8;
+  animation: moveBubble 5s infinite linear;
+}
+
+@keyframes moveBubble {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(calc(100vw - 30px), calc(100vh - 30px));
+  }
+}
+
+/* Competitive Programming box */
+.cp-box {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.rotating-circle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #007bff;
+  border-radius: 50%;
+  animation: rotateAround 5s linear infinite;
+}
+
+@keyframes rotateAround {
+  0% {
+    top: 250px; /* Bottom right corner */
+    left: 250px;
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    top: 50px;
+    left: 250px; /* Top right corner */
+  }
+  50% {
+    top: 50px;
+    left: 50px; /* Top left corner */
+  }
+  75% {
+    top: 250px;
+    left: 50px; /* Bottom left corner */
+  }
+  100% {
+    top: 250px;
+    left: 250px; /* Back to bottom right */
+  }
+}
+
+/* Styles for the lines connecting the bubbles */
+.line {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+
+
+/*oop*/
+/* styles.css */
+
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #4d0202;
+}
+
+/* Navbar styling */
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header (Jumbotron) styling */
+.jumbotron {
+  background-color: #007bff;
+  color: white;
+  padding: 3rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.jumbotron h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.jumbotron p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Topics List styling */
+.container h2 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.list-group-item {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-group-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.list-group-item a {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.list-group-item a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Footer styling */
+footer {
+  background-color: #343a40;
+  color: #ccc;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
+/*upore line */
+/* Floating shapes */
+.jumbotron {
+  position: relative;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%; /* Make circles */
+  opacity: 0.7;
+  animation: float 10s infinite ease-in-out;
+  z-index: 0;
+}
+
+/* Circle shapes */
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 200, 50, 0.3);
+  top: 20%;
+  left: 10%;
+  animation-duration: 6s;
+}
+
+.circle2 {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(0, 150, 136, 0.3);
+  top: 50%;
+  left: 80%;
+  animation-duration: 8s;
+}
+
+/* Square shapes */
+.square {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(63, 81, 181, 0.3);
+  top: 70%;
+  left: 30%;
+  animation-duration: 12s;
+  border-radius: 8px; /* Square with slightly rounded corners */
+}
+
+.square2 {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(233, 30, 99, 0.3);
+  top: 40%;
+  left: 20%;
+  animation-duration: 15s;
+  border-radius: 8px;
+}
+
+/* Float animation */
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) translateX(20px) rotate(45deg);
+  }
+  100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+}
+
+/* Make sure header content is above the shapes */
+.jumbotron h1,
+.jumbotron p {
+  position: relative;
+  z-index: 2;
+}
+/* Dynamic styles */
+
+/* Navbar dynamic hover effect */
+.navbar-brand {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #ffdd57; /* A yellow tint for hover */
+  transform: scale(1.1); /* Slight scaling effect on hover */
+}
+
+/* Header text dynamic styling */
+.jumbotron {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #ffffff;
+  padding: 4rem 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.jumbotron h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.jumbotron p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 2s ease forwards;
+}
+
+/* Add a subtle pulse effect to header text */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.jumbotron h1:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Animated gradient background */
+.jumbotron::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+  opacity: 0.3;
+  animation: gradientMove 5s infinite linear;
+  z-index: 1;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Ensure header text stays above the gradient */
+.jumbotron h1,
+.jumbotron p {
+  position: relative;
+  z-index: 2;
+}
